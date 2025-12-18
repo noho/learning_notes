@@ -41,59 +41,40 @@
     font-weight: 600;
   }
 
-  .markdown-body {
-    /* 让 github-markdown.css 的排版仍然生效，但宽度/边距由 .page 控制 */
-    max-width: none;
-    padding-top: 14px;
-  }
 
   /* 打印/导出 PDF：页边距 + 页眉页脚（固定定位） */
-  @media print {
-    @page { margin: 20mm 18mm; }
+  
+</style>
 
-    body {
-      background: #fff;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+<!-- Word 打开 HTML 时经常不完整支持/不加载外链 CSS：在正文前提供一个“内联表格边框”兜底 -->
+<!-- <style>
+  /* 通用兜底：即便外链 github-markdown.css 不生效，也能看到表格分割线 */
+  .markdown-body table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .markdown-body table th,
+  .markdown-body table td {
+    border: 1px solid #d0d7de;
+  }
+</style> -->
 
-    .page {
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    .print-header,
-    .print-footer {
-      display: block;
-      position: fixed;
-      left: 0;
-      right: 0;
-      font-size: 10pt;
-      color: #666;
-      background: #fff;
-    }
-
-    .print-header {
-      top: 0;
-      padding: 8mm 18mm 4mm 18mm;
-      border-bottom: 0.3pt solid #ddd;
-    }
-
-    .print-footer {
-      bottom: 0;
-      padding: 4mm 18mm 8mm 18mm;
-      border-top: 0.3pt solid #ddd;
-    }
-
-    /* 给正文留出页眉/页脚空间，避免被 fixed 遮挡 */
-    .markdown-body {
-      padding-top: 30mm;
-      padding-bottom: 25mm;
-    }
+<!-- 进一步兜底：仅 Word（mso）条件注释（浏览器会忽略），增强边框落地概率 -->
+<!--[if gte mso 9]>
+<style>
+  .markdown-body table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+  }
+  .markdown-body table th,
+  .markdown-body table td {
+    border: 1pt solid #d0d7de !important;
+    mso-border-alt: solid #d0d7de 1.0pt;
   }
 </style>
+<![endif]-->
 
 <div class="page">
   <div class="print-header">
